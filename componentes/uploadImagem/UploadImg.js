@@ -40,7 +40,7 @@ export default function UploadImg({className, setImagem, imagemPreview, imagempr
                     <img src={imagemPreview} alt='avatar' className={imagempreviewClassName}></img>
                 </div>
             )}
-            <input type='file'  accept="image/*" ref={referenciaInput} onChange={alterarImagem} />
+            <input type='file' className="oculto" accept="image/*" ref={referenciaInput} onChange={alterarImagem} />
         </div>
     )
 }
