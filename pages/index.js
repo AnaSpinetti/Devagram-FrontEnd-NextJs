@@ -1,7 +1,5 @@
 import { useRef, useState } from "react";
-import Avatar from "../componentes/Avatar/avatar";
-import Botao from "../componentes/botao/Botao";
-import UploadImg from "../componentes/uploadImagem/UploadImg";
+import Login from "../componentes/login/Login";
 
 export default function Home() {
   const [imagem, setImagem] = useState(null);
@@ -9,9 +7,7 @@ export default function Home() {
 
   return (
     <>
-      <UploadImg aoSetarAReferencia={(ref) => referenciaInput.current =ref} setImagem={setImagem} imagemPreview={imagem?.preview} />
-      <Avatar />
-      <Botao cor="invertido" texto={'texto'} />
+      <Login />
     </>
   )
 }

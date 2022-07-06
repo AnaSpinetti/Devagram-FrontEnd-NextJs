@@ -35,6 +35,7 @@ export default function UploadImg({className, setImagem, imagemPreview, imagempr
     return(
 
         <div className={`uploadImgContainer ${className}`} onClick={abrirSeletorArquivos}>
+            <button>Abrir</button>
             {imagemPreview && (
                 <div className="imagemPreviewContainer">
                     <img src={imagemPreview} alt='avatar' className={imagempreviewClassName}></img>
