@@ -15,7 +15,7 @@ export default function Login(){
     return (
         <section className={'paginaLogin paginaPublica'}>
             <div className="logoContainer">
-                <Image src={logo} alt="Logotipo" layout="fill"  />
+                <Image src={logo} className='logo' alt="Logotipo" layout="fill"  />
             </div>
 
             <div className="conteudoPaginaPublica">
