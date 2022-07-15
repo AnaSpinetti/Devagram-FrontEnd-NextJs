@@ -1,0 +1,39 @@
+.paginaCadastro{
+    .uploadImgContainer{
+        text-align: center;
+        position: relative;
+        margin-bottom: 48px;
+
+        button{
+            visibility: hidden;
+        }
+
+        .avatarPreview{
+            width: 120px;
+            height: 120px;
+        }
+
+        &::after{
+            content: url('/images/camera.svg');
+            width: 48px;
+            height: 48px;
+            position: absolute;
+            right: 0;
+            margin: auto;
+            left: 90px;
+            bottom: 0;
+        }
+
+        @media screen and (min-width: $breakPoint){
+            .rodapePaginaPublica{
+                display: flex;
+                justify-content: center;
+            }
+
+            p{
+                margin-right: 6px;
+            }
+        }
+
+    }
+}
