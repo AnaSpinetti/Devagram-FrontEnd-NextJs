@@ -55,6 +55,14 @@ input{
   }
 }
 
+.mensagemValidacao{
+  display: block;
+  font-size: 90%;
+  margin-top: -15px;
+  margin-bottom: 10px;
+  color: red;
+}
+
 @import '../public/fonts/fonts.scss';
 @import '../componentes/botao/botao.scss';
 @import '../componentes/inputPublico/InputPublico.scss';
