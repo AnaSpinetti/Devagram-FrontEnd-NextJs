@@ -37,32 +37,43 @@ export default function Cadastro(){
 
     const aoSubmeter = async (e) => {
         e.preventDefault();
-        if(!validarFormulario()){
-            return
-        };
-        setIsLoading(true)
+        if (!validarFormulario()) {
+            return;
+        }
+
+        setIsLoading(true);
 
         try {
-            const corpoReqCadastro = new FormData();
+            // const corpoReqCadastro = new FormData();
+            // corpoReqCadastro.append("nome", nome);
+            // corpoReqCadastro.append("email", email);
+            // corpoReqCadastro.append("senha", senha);
 
-            corpoReqCadastro.append("nome", nome);
-            corpoReqCadastro.append("email", email);
-            corpoReqCadastro.append("senha", senha);
+            // if (imagem?.arquivo) {
+            //     corpoReqCadastro.append("file", imagem.arquivo);
+            // }
 
-            // Verificando se foi selecionado - valida no "uploadImg"
-            if(imagem?.arquivo){
-                corpoReqCadastro.append("file", imagem.arquivo);
+            const corpoReqCadastro = {
+                nome, 
+                email, 
+                senha,
+                file: imagem.arquivo
             }
 
             await usuarioService.cadastro(corpoReqCadastro);
+            await usuarioService.login({
+                login: email,
+                senha
+            });
+        
             alert('Usuário cadastrado com sucesso')
 
         } catch (error) {
-            console.log(error)
-            alert('Erro ao cadastrar usuário ' + error?.response?.data?.error )
-        }
-
-        setIsLoading(false)
+                console.log(error)
+                alert('Erro ao cadastrar usuário ' + error?.response?.data?.error )
+            }
+    
+            setIsLoading(false)
     }
 
     return(
@@ -79,7 +90,7 @@ export default function Cadastro(){
                     <InputPublico mensagemValidacao='Email inválido' exibirMensagemValidacao={email && !validarEmail(email)} imagem={imgEnvelope} texto='Digite o seu email' tipo="email" aoAlterarValor={(e) => setEmail(e.target.value)} valor={email} />
                     <InputPublico mensagemValidacao='Senha inválida, deve possuir mais de 3 caracteres' exibirMensagemValidacao={senha && !validarSenha(senha)} imagem={imgCadeado} texto="Digite sua senha" tipo="password" aoAlterarValor={(e) => setSenha(e.target.value)} valor={senha} />
                     <InputPublico mensagemValidacao='As senhas não conferem' exibirMensagemValidacao={senhaConfirmacao && !validarConfirmacaoSenha(senha, senhaConfirmacao)} imagem={imgCadeado} texto="Confirme sua Senha" tipo="password" aoAlterarValor={(e) => setSenhaConfirmacao(e.target.value)} valor={senhaConfirmacao} />
-                    <Botao texto='Cadastrar' tipo='submit' desabilitado={!validarFormulario() || isLoading} />
+                    <Botao texto='Cadastrar' type='submit' desabilitado={!validarFormulario() || isLoading} />
                 </form>
 
                 <div className='rodapepaginapublica'>

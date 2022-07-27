@@ -4,13 +4,18 @@ import logo from '../../public/images/logoLogin.svg';
 import Image from 'next/image';
 import Botao from '../botao/Botao';
 import { useState } from 'react';
+import UsuarioService from '../../services/UsuarioService';
+
 import {validarEmail, validarNome, validarSenha} from '../../utils/validadores';
 import InputPublico from '../inputPublico/InputPublico';
 import Link from 'next/link'
 
+const usuarioService = new UsuarioService();
+
 export default function Login(){
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     const validarFormulario = () => {
         return (
@@ -18,6 +23,27 @@ export default function Login(){
             validarSenha(senha) 
         )
     }
+    
+    const aoSubmeter = async (e) => {
+        e.preventDefault();
+
+        if(!validarFormulario()){
+           return
+       };
+       setIsLoading(true)
+
+       try {
+            await usuarioService.login({
+                email: email,
+                senha
+            });
+       }catch (error) {
+            console.log(error)
+           alert('Erro ao realizar login de usuário ' + error?.response?.data?.error )
+       }
+   
+       setIsLoading(false)
+   }
 
     return (
         <section className={'paginaLogin paginaPublica'}>
@@ -26,10 +52,10 @@ export default function Login(){
             </div>
 
             <div className="conteudoPaginaPublica">
-                <form>
+                <form onSubmit={aoSubmeter}>
                     <InputPublico imagem={imgEnvelope} texto='Digite o seu email' tipo='email' mensagemValidacao='O email informado é inválido' exibirMensagemValidacao={email && !validarEmail(email)} aoAlterarValor={(e) => setEmail(e.target.value)} valor={email} />
                     <InputPublico imagem={imgCadeado} texto='Digite sua senha' tipo='password' mensagemValidacao='A senha informada é inválida' exibirMensagemValidacao={senha && !validarSenha(senha)} aoAlterarValor={(e) => setSenha(e.target.value)} valor={senha} />
-                    <Botao texto='Login' tipo='submit' desabilitado={!validarFormulario()} />
+                    <Botao texto='Login' type='submit' desabilitado={!validarFormulario() || isLoading}  />
                 </form>
 
                 <div className='rodapepaginapublica'>

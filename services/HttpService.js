@@ -3,11 +3,12 @@ import axios from "axios";
 export default class HttpService{
     constructor(){
         this.axios = axios.create({
-            baseURL: process.env.NEXT_PUBLIC_API_URL + '/api'
+            baseURL: 'https://devagram-indol.vercel.app/api'
         });
     }
 
-    post(url, data){
-        return this.axios.post(url, data);
+    post(url, dados){
+        console.log(url, dados)
+        return this.axios.post(url, dados);
     }
 }
