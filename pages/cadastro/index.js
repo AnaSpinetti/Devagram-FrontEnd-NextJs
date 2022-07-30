@@ -44,21 +44,15 @@ export default function Cadastro(){
         setIsLoading(true);
 
         try {
-            // const corpoReqCadastro = new FormData();
-            // corpoReqCadastro.append("nome", nome);
-            // corpoReqCadastro.append("email", email);
-            // corpoReqCadastro.append("senha", senha);
+            const corpoReqCadastro = new FormData();
+            corpoReqCadastro.append("nome", nome);
+            corpoReqCadastro.append("email", email);
+            corpoReqCadastro.append("senha", senha);
 
-            // if (imagem?.arquivo) {
-            //     corpoReqCadastro.append("file", imagem.arquivo);
-            // }
-
-            const corpoReqCadastro = {
-                nome, 
-                email, 
-                senha,
-                file: imagem.arquivo
+            if (imagem?.arquivo) {
+                corpoReqCadastro.append("file", imagem.arquivo);
             }
+
 
             await usuarioService.cadastro(corpoReqCadastro);
             await usuarioService.login({
@@ -69,7 +63,6 @@ export default function Cadastro(){
             alert('Usuário cadastrado com sucesso')
 
         } catch (error) {
-                console.log(error)
                 alert('Erro ao cadastrar usuário ' + error?.response?.data?.error )
             }
     
