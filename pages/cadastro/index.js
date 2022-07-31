@@ -12,6 +12,7 @@ import imgCadeado from '../../public/images/key.svg';
 import userIcon from '../../public/images/userIcon.svg';
 import logo from '../../public/images/logoLogin.svg';
 import imgDefault from '../../public/images/avatarDefault.svg';
+import {useRouter} from 'next/router';
 
 import { validarEmail, validarSenha, validarConfirmacaoSenha, validarNome } from '../../utils/validadores';
 
@@ -25,6 +26,7 @@ export default function Cadastro(){
     const [senhaConfirmacao, setSenhaConfirmacao] = useState('');
     const [imagem, setImagem] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+    const router = useRouter()
 
     const validarFormulario = () => {
         return (
@@ -59,8 +61,8 @@ export default function Cadastro(){
                 login: email,
                 senha
             });
-        
-            alert('Usuário cadastrado com sucesso')
+
+            router.push('/')
 
         } catch (error) {
                 alert('Erro ao cadastrar usuário ' + error?.response?.data?.error )

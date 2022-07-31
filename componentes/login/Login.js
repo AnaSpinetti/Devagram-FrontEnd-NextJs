@@ -12,7 +12,7 @@ import Link from 'next/link'
 
 const usuarioService = new UsuarioService();
 
-export default function Login(){
+export default function Login({aposAutenticacao}){
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -37,6 +37,10 @@ export default function Login(){
                 email: email,
                 senha
             });
+
+            if(aposAutenticacao){
+                aposAutenticacao()
+            }
        }catch (error) {
             console.log(error)
            alert('Erro ao realizar login de usuário ' + error?.response?.data?.error )
